@@ -65,17 +65,17 @@ def collect_urls_data(driver, category_dict):
 
         # Product name
         try:
-            url_dict['product_name'] = product.select_one('div[class~="Product-summary"]').text.replace('\n', '').strip()
+            url_dict['product_name'] = product.select_one('div[class~="Product-summary"]').text.replace('\n', '').strip() # TODO -> code trop long
         except:
             pass
 
         # Product mean rating
         try:
-            url_dict['mean_rating'] = float(product.select_one('span[class="Rating-average"]').text.replace('/5', '').strip())
+            url_dict['mean_rating'] = float(product.select_one('span[class="Rating-average"]').text.replace('/5', '').strip()) # TODO -> code trop long
         except:
             pass
 
-        # Product review number
+        # Product review number # TODO -> review count
         try:
             url_dict['n_reviews'] = int(product.select_one('span[class="Rating-count"]').text)
         except:
@@ -87,12 +87,19 @@ def collect_urls_data(driver, category_dict):
                     product.select_one('span[class="Price-decimal"]').text
             url_dict['product_price'] = price
         except:
+            # TODO -> ajouter une condition try / except
+            # try:
+            #     price = product.select_one('span[class="integers"]').text + \
+            #             product.select_one('span[class="decimals"]').text
+            #     url_dict['product_price'] = price
+            # except:
+            #     pass
             price = product.select_one('span[class="integers"]').text + \
                     product.select_one('span[class="decimals"]').text
             url_dict['product_price'] = price
             pass
 
-        # Product reviews
+        # Product reviews # TODO -> pas le bon commentaire -> "Save urls with reviews"
         try:
             if product.select_one('div[class="Rating Rating--stars"]'):
                 urls_dicts.append(url_dict)
@@ -265,7 +272,7 @@ def collect_reviews_data(driver, product_dict):
             # Review rating
             try:
                 stars = str(review.find_element(
-                    By.CSS_SELECTOR, 'span[class="bv-rating-stars-container"] '
+                    By.CSS_SELECTOR, 'span[class="bv-rating-stars-container"] ' # TODO -> je prefere lorsque tu fais: + \
                                      + 'span[class="bv-off-screen"]').get_attribute('innerText'))
                 review_dict['review_rating'] = stars[0]
             except:
