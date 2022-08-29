@@ -17,7 +17,7 @@ from data_collector import (
     collect_product_data,
     collect_reviews_data
 )
-
+# TODO -> pas de saut de ligne
 from utils import save_data
 
 
@@ -59,13 +59,13 @@ def save_products_page_data(driver, category_dict, path_urls):
             driver.execute_script("arguments[0].click();", load_more_reviews_btn)
             print("[LOG] Click on show more products button.")
             time.sleep(random.uniform(1, 5))
-
+        # TODO -> saut de ligne
         except TimeoutException:
             print("[LOG] There isn’t any more products to show.")
-            break
+            break # TODO -> pas de saut de ligne
         except KeyboardInterrupt:
             print("[LOG] The collect has been interrupted by the user.")
-            break
+            break # TODO -> pas de saut de ligne
         except:
             break
     
@@ -132,7 +132,9 @@ def save_product_page_data(driver, category_dict, path_products, path_reviews):
 
     # Save the product data
     save_data(path_products, product_dict, 'products')
-
+    
+    # TODO -> n_saved_reviews = 0
+    
     # Detect the presence of the reviews and select them
     while True:
         try:
@@ -158,7 +160,9 @@ def save_product_page_data(driver, category_dict, path_products, path_reviews):
 
         # Save the reviews data
         save_data(path_reviews, reviews_dicts, 'reviews')
-
+        
+        # TODO -> n_saved_reviews = n_saved_reviews + len(reviews_dicts)
+        
         print("[LOG] {} reviews have been collected.".format(len(reviews_dicts)))
 
         # Go to the next reviews page
@@ -176,4 +180,4 @@ def save_product_page_data(driver, category_dict, path_products, path_reviews):
             print(e)
             break
 
-    return product_dict, reviews_dicts
+    return product_dict, reviews_dicts # TODO -> pourquoi retourner reviews_dicts ? -> pq pas n_saved_reviews ?
