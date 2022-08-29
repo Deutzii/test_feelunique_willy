@@ -49,7 +49,7 @@ def main():
         }
 
         # Select the url under specific conditions
-        if url_dict['collected'] == 'will':
+        if url_dict['collected'] == 'will': # TODO -> changer pour enlever 'will'
             
             # Load the driver
             driver = webdriver.Chrome(PATH_DRIVER, options=OPTIONS)
@@ -64,7 +64,7 @@ def main():
                     PATH_REVIEWS
                 )
 
-                # Change the status of the current url and save it.
+                # Change the status of the current url and save it. # TODO -> pas de point à la fin des commentaires
                 # --------------------------------------------------------
                 # Step 1: Verify if the product has a name
                 if product_dict['product_name']:
@@ -77,14 +77,14 @@ def main():
 
                             # Step 4: Verify that reviews have been collected
                             # The length of collected reviews is equal to the printed number of reviews on
-                            # the current product page, so all the reviews have been collected.
+                            # the current product page, so all the reviews have been collected. # TODO -> pas de point à la fin des commentaires
                             if len(reviews_dicts) >= int(product_dict['n_reviews']):
                                 url_dict['collected'] = 'yes' 
                                 print("[LOG] All the reviews have been collected for the product.")
 
                             # Step 4 (if not): Not all reviews have been collected
                             # The length of collected reviews isn't equal to the printed number of reviews on
-                            # the current product page, so not all the reviews have been collected.
+                            # the current product page, so not all the reviews have been collected. # TODO -> pas de point à la fin des commentaires
                             else: 
                                 url_dict['collected'] = 'once'
                                 print("[LOG] Not all the reviews have been collected for the product.")
@@ -105,8 +105,8 @@ def main():
                 # Step 1 (if not): The page data didn't load
                 else:
                     # If the page data didn't load
-                    # The collect for the current url has raised some errors.
-                    # The url is set as 'issue'.
+                    # The collect for the current url has raised some errors. # TODO -> pas de point à la fin des commentaires
+                    # The url is set as 'issue'. # TODO -> pas de point à la fin des commentaires
                     url_dict['collected'] = 'issue'
                     print("[LOG] Issue with the current url. Saved as url with issues.")
 
