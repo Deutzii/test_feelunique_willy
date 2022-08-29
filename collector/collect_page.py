@@ -20,8 +20,8 @@ from selenium.webdriver.support.ui import WebDriverWait
 target_url = 'https://www.feelunique.com/p/Liz-Earle-Pure-Muslin-Cloths-x-2'
 
 # Set paths
-PATH_DRIVER = 'C:\Program Files (x86)\chromedriver_win32\chromedriver.exe'
-#PATH_DRIVER = os.path.join(os.curdir, 'chromedriver')
+#PATH_DRIVER = 'C:\Program Files (x86)\chromedriver_win32\chromedriver.exe'
+PATH_DRIVER = os.path.join(os.curdir, 'chromedriver')
 PATH_PRODUCT = os.path.join(os.curdir, 'product')
 PATH_REVIEWS = os.path.join(os.curdir, 'reviews')
 PATH_URLS_NEW = os.path.join(os.curdir, 'urls_new')

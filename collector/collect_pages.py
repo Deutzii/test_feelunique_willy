@@ -49,7 +49,7 @@ def main():
         }
 
         # Select the url under specific conditions
-        if url_dict['collected'] == 'will':
+        if url_dict['collected'] == 'no': # 'will'
             
             # Load the driver
             driver = webdriver.Chrome(PATH_DRIVER, options=OPTIONS)
