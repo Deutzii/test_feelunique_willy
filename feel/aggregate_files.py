@@ -5,10 +5,9 @@ Aggregates all the files contained in reviews/ and products/ into merged_product
 
 import glob
 import json
+from json.decoder import JSONDecodeError
 import os
 import time
-
-from json.decoder import JSONDecodeError
 
 from const import (
     COLLECT_DATE,
