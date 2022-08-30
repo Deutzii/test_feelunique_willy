@@ -9,6 +9,7 @@ import os
 import time
 
 from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
 
 from page_navigator import save_product_page_data
 
@@ -49,10 +50,11 @@ def main():
         }
 
         # Select the url under specific conditions
-        if url_dict['collected'] == 'will':
+        if url_dict['collected'] == 'will':  # TODO -> change from 'will' to 'no'
             
             # Load the driver
-            driver = webdriver.Chrome(PATH_DRIVER, options=OPTIONS)
+            ser = Service(PATH_DRIVER)
+            driver = webdriver.Chrome(service=ser, options=OPTIONS)
             print("[LOG] Time:", time.strftime('%H:%M:%S'))
 
             try:
@@ -64,7 +66,7 @@ def main():
                     PATH_REVIEWS
                 )
 
-                # Change the status of the current url and save it.
+                # Change the status of the current url and save it
                 # --------------------------------------------------------
                 # Step 1: Verify if the product has a name
                 if product_dict['product_name']:
@@ -77,14 +79,14 @@ def main():
 
                             # Step 4: Verify that reviews have been collected
                             # The length of collected reviews is equal to the printed number of reviews on
-                            # the current product page, so all the reviews have been collected.
+                            # the current product page, so all the reviews have been collected
                             if len(reviews_dicts) >= int(product_dict['n_reviews']):
                                 url_dict['collected'] = 'yes' 
                                 print("[LOG] All the reviews have been collected for the product.")
 
                             # Step 4 (if not): Not all reviews have been collected
                             # The length of collected reviews isn't equal to the printed number of reviews on
-                            # the current product page, so not all the reviews have been collected.
+                            # the current product page, so not all the reviews have been collected
                             else: 
                                 url_dict['collected'] = 'once'
                                 print("[LOG] Not all the reviews have been collected for the product.")
@@ -101,12 +103,11 @@ def main():
                         url_dict['collected'] = 'yes'
                         print("[LOG] There are no reviews for the current url.")
 
-
                 # Step 1 (if not): The page data didn't load
                 else:
                     # If the page data didn't load
-                    # The collect for the current url has raised some errors.
-                    # The url is set as 'issue'.
+                    # The collect for the current url has raised some errors
+                    # The url is set as 'issue'
                     url_dict['collected'] = 'issue'
                     print("[LOG] Issue with the current url. Saved as url with issues.")
 

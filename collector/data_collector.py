@@ -57,6 +57,12 @@ def collect_urls_data(driver, category_dict):
         except:
             pass
 
+        # Product sku code
+        try:
+            url_dict['code_sku'] = product['data-sku']
+        except:
+            pass
+
         # Product url
         try:
             url_dict['url'] = 'https://www.feelunique.com' + product.a['href']
@@ -65,36 +71,47 @@ def collect_urls_data(driver, category_dict):
 
         # Product name
         try:
-            url_dict['product_name'] = product.select_one('div[class~="Product-summary"]').text.replace('\n', '').strip()
+            url_dict['product_name'] = product.select_one(
+                'div[class~="Product-summary"]').text.replace('\n', '').strip()
         except:
             pass
 
         # Product mean rating
         try:
-            url_dict['mean_rating'] = float(product.select_one('span[class="Rating-average"]').text.replace('/5', '').strip())
+            url_dict['mean_rating'] = float(product.select_one(
+                'span[class="Rating-average"]').text.replace('/5', '').strip())
         except:
             pass
 
-        # Product review number
+        # Review count
         try:
-            url_dict['n_reviews'] = int(product.select_one('span[class="Rating-count"]').text)
+            url_dict['n_reviews'] = int(product.select_one(
+                'span[class="Rating-count"]').text)
         except:
             pass
 
         # Product price
         try:
-            price = product.select_one('span[class="Price-integer"]').text + \
-                    product.select_one('span[class="Price-decimal"]').text
+            price = product.select_one(
+                'span[class="Price-integer"]').text + \
+                    product.select_one(
+                        'span[class="Price-decimal"]').text
             url_dict['product_price'] = price
         except:
-            price = product.select_one('span[class="integers"]').text + \
-                    product.select_one('span[class="decimals"]').text
-            url_dict['product_price'] = price
+            try:
+                price = product.select_one(
+                    'span[class="integers"]').text + \
+                        product.select_one(
+                            'span[class="decimals"]').text
+                url_dict['product_price'] = price
+            except:
+                pass
             pass
 
-        # Product reviews
+        # Save urls with reviews
         try:
-            if product.select_one('div[class="Rating Rating--stars"]'):
+            if product.select_one(
+                    'div[class="Rating Rating--stars"]'):
                 urls_dicts.append(url_dict)
         except:
             pass
@@ -118,6 +135,9 @@ def collect_product_data(driver, category_dict):
     """
 
     product_dict = init_product_dict()
+
+    # Product sku code
+    product_dict['code_sku'] = category_dict['code_sku']
 
     # Product url
     product_dict['url'] = category_dict['url']
@@ -169,8 +189,6 @@ def collect_product_data(driver, category_dict):
     except:
         pass
 
-    return product_dict
-
 
 ##### ------------------------------------------------------ #####
 ##### --------------------- REVIEWS ------------------------ #####
@@ -193,18 +211,14 @@ def collect_reviews_data(driver, product_dict):
         reviews = WebDriverWait(driver, 10).until(EC.presence_of_all_elements_located((
             By.CSS_SELECTOR, 'ol[data-bv-v] > li[itemprop="review"]')))
         print('[LOG] There are some reviews on the current page.')
-
     except KeyboardInterrupt:
         exit('[LOG] The collect has been interrupted by the user.')
-
     except TimeoutException:
         print("[LOG] There aren't any reviews on the current page.")
         pass
-
     except Exception as e:
         print(e)
         pass
-
     else:
         for id_review, review in enumerate(reviews):
             review_dict = init_review_dict()
@@ -218,6 +232,7 @@ def collect_reviews_data(driver, product_dict):
             review_dict['id_review_product'] = 1 + id_review
 
             # Retrieve the information from the product dictionary
+            review_dict['code_sku'] = product_dict['code_sku']
             review_dict['url'] = product_dict['url']
             review_dict['product_name'] = product_dict['product_name']
             review_dict['product_brand'] = product_dict['product_brand']
@@ -246,7 +261,8 @@ def collect_reviews_data(driver, product_dict):
 
             # Review recommendation
             try:
-                if len(review.find_elements(By.CSS_SELECTOR, 'span[class="bv-badge-label"]')) > 0:
+                if len(review.find_elements(
+                        By.CSS_SELECTOR, 'span[class="bv-badge-label"]')) > 0:
                     review_dict['writer_recommendation'] = True
                 else:
                     review_dict['writer_recommendation'] = False
@@ -256,24 +272,24 @@ def collect_reviews_data(driver, product_dict):
             # Review date
             try:
                 review_dict['review_date'] = str(review.find_element(
-                    By.CSS_SELECTOR, 'div[class="bv-content-datetime"] '
-                                     'span[class="bv-content-datetime-stamp"]').get_attribute('innerText')) \
-                    .replace(' ', '')
+                    By.CSS_SELECTOR, 'div[class="bv-content-datetime"] ' + \
+                                     'meta[itemprop="datePublished"]').get_attribute('content'))
             except:
                 pass
 
             # Review rating
             try:
                 stars = str(review.find_element(
-                    By.CSS_SELECTOR, 'span[class="bv-rating-stars-container"] '
-                                     + 'span[class="bv-off-screen"]').get_attribute('innerText'))
+                    By.CSS_SELECTOR, 'span[class="bv-rating-stars-container"] ' + \
+                                     'span[class="bv-off-screen"]').get_attribute('innerText'))
                 review_dict['review_rating'] = stars[0]
             except:
                 pass
 
             # Verified purchase
             try:
-                if len(review.find_elements(By.CSS_SELECTOR, 'span[class="bv-badge-label"]')) > 0:
+                if len(review.find_elements(
+                        By.CSS_SELECTOR, 'span[class="bv-badge-label"]')) > 0:
                     review_dict['verified_purchase'] = True
                 else:
                     review_dict['verified_purchase'] = False

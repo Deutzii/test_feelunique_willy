@@ -17,7 +17,6 @@ from data_collector import (
     collect_product_data,
     collect_reviews_data
 )
-
 from utils import save_data
 
 
@@ -59,7 +58,6 @@ def save_products_page_data(driver, category_dict, path_urls):
             driver.execute_script("arguments[0].click();", load_more_reviews_btn)
             print("[LOG] Click on show more products button.")
             time.sleep(random.uniform(1, 5))
-
         except TimeoutException:
             print("[LOG] There isn’t any more products to show.")
             break
@@ -80,11 +78,9 @@ def save_products_page_data(driver, category_dict, path_urls):
         save_data(path_urls, urls_dicts, 'urls_new')
 
         print("[LOG] {} urls have been collected.".format(len(urls_dicts)))
-
     except KeyboardInterrupt:
         print("[LOG] The collect has been interrupted by the user.")
         pass
-
     except:
         print("[LOG] There is an error for the current url.")
         pass
@@ -139,14 +135,11 @@ def save_product_page_data(driver, category_dict, path_products, path_reviews):
             reviews = WebDriverWait(driver, 10).until(EC.presence_of_all_elements_located((
                 By.CSS_SELECTOR, 'ol[data-bv-v] > li[data-content-id]')))
             print('[LOG] There are some reviews on the current page.')
-
         except KeyboardInterrupt:
             exit('[LOG] The collect has been interrupted by the user.')
-
         except TimeoutException:
             print("[LOG] There aren't any reviews on the current page.")
             pass
-
         except Exception as e:
             print(e)
             pass
@@ -167,11 +160,9 @@ def save_product_page_data(driver, category_dict, path_products, path_reviews):
                 By.CSS_SELECTOR, '.bv-content-pagination-buttons-item-next a'))))
             print('[LOG] Go to the next reviews page.')
             time.sleep(5)
-
         except TimeoutException:
             print('[LOG] There are no more reviews pages.')
             break
-
         except Exception as e:
             print(e)
             break

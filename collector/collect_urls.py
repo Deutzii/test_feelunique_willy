@@ -6,6 +6,7 @@ Crawls the categories list and sends the category URL to the page navigator."""
 import os
 
 from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
 
 from page_navigator import save_products_page_data
 
@@ -27,7 +28,8 @@ def main():
         }
 
         # Set the driver
-        driver = webdriver.Chrome(PATH_DRIVER, options=OPTIONS)
+        ser = Service(PATH_DRIVER)
+        driver = webdriver.Chrome(service=ser, options=OPTIONS)
 
         # Collect urls data
         _ = save_products_page_data(driver, category_dict, PATH_URLS_NEW)
