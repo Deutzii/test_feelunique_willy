@@ -42,7 +42,7 @@ def save_products_page_data(driver, category_dict, path_urls):
     # Accept the cookies
     try:
         cookie_btn = WebDriverWait(driver, 15).until(EC.presence_of_element_located((
-            By.CSS_SELECTOR, 'button[id="notice-ok"]')))
+            By.CSS_SELECTOR, 'div[class="right"] a[id="notice-ok"]')))
         cookie_btn.click()
         print("[LOG] Click on the cookies button.")
         time.sleep(random.uniform(1, 5))
@@ -114,11 +114,12 @@ def save_product_page_data(driver, category_dict, path_products, path_reviews):
     # Close the cookies pop up
     try:
         cookie_btn = WebDriverWait(driver, 15).until(EC.presence_of_element_located((
-            By.CSS_SELECTOR, 'button[id="notice-ok"]')))
+            By.CSS_SELECTOR, 'div[class="right"] a[id="notice-ok"]')))
         cookie_btn.click()
         print("[LOG] Click on the cookies button.")
         time.sleep(random.uniform(1, 5))
     except:
+        print("Cookies not clicked")
         pass
 
     print("[LOG] Start collecting product data.")

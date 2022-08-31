@@ -20,7 +20,7 @@ OPTIONS.add_argument("--no-first-run --no-service-autorun --password-store=basic
 
 # Start in full-screen with a defined window size
 OPTIONS.add_argument("window-size=1920,1080")
-OPTIONS.add_argument("start-maximised")
+#OPTIONS.add_argument("start-maximised")
 
 # Hide some bot related stuff to increase stealthiness
 OPTIONS.add_argument('--disable-blink-features=AutomationControlled')

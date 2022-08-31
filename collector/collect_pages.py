@@ -50,8 +50,8 @@ def main():
         }
 
         # Select the url under specific conditions
-        if url_dict['collected'] == 'will':  # TODO -> change from 'will' to 'no'
-            
+        if url_dict['collected'] == 'no':
+
             # Load the driver
             ser = Service(PATH_DRIVER)
             driver = webdriver.Chrome(service=ser, options=OPTIONS)
@@ -81,13 +81,13 @@ def main():
                             # The length of collected reviews is equal to the printed number of reviews on
                             # the current product page, so all the reviews have been collected
                             if len(reviews_dicts) >= int(product_dict['n_reviews']):
-                                url_dict['collected'] = 'yes' 
+                                url_dict['collected'] = 'yes'
                                 print("[LOG] All the reviews have been collected for the product.")
 
                             # Step 4 (if not): Not all reviews have been collected
                             # The length of collected reviews isn't equal to the printed number of reviews on
                             # the current product page, so not all the reviews have been collected
-                            else: 
+                            else:
                                 url_dict['collected'] = 'once'
                                 print("[LOG] Not all the reviews have been collected for the product.")
 
@@ -99,7 +99,7 @@ def main():
 
                     # Step 2 (if not): The current url has 0 reviews
                     # The current url has 0 reviews
-                    else: 
+                    else:
                         url_dict['collected'] = 'yes'
                         print("[LOG] There are no reviews for the current url.")
 
@@ -115,13 +115,13 @@ def main():
             # --------------------------------------------------------
             # The collect for the current url has raised an error so the url status is set to 'issue'
             except:
-                url_dict['collected'] = 'issue' 
+                url_dict['collected'] = 'issue'
                 print("[LOG] Issue with the current url. Saved as url with issues.")
 
             finally:
                 with open(PATH_FILE_URLS_TO_COLLECT, 'w', encoding='utf-8') as file_to_dump:
                     json.dump(urls_dicts, file_to_dump, indent=4, ensure_ascii=False)
-            
+
             driver.delete_all_cookies()
             driver.quit()
 

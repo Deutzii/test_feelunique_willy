@@ -136,8 +136,16 @@ def collect_product_data(driver, category_dict):
 
     product_dict = init_product_dict()
 
+
     # Product sku code
-    product_dict['code_sku'] = category_dict['code_sku']
+    try:
+        product_dict['code_sku'] = driver.find_element(
+            By.CSS_SELECTOR, 'div[class="sub-products"] > [data-sku]:first-child').get_attribute('data-sku')
+    except:
+        product_dict['code_sku'] = driver.find_element(
+            By.CSS_SELECTOR, 'div[class="item"] a[class="add-to-wishlist wishHeart"]').get_attribute('data-sku')
+        pass
+
 
     # Product url
     product_dict['url'] = category_dict['url']
@@ -188,6 +196,8 @@ def collect_product_data(driver, category_dict):
             By.CSS_SELECTOR, 'span[class="Rating-count"]').get_attribute('innerText').split()[0])
     except:
         pass
+
+    return product_dict
 
 
 ##### ------------------------------------------------------ #####
@@ -261,11 +271,17 @@ def collect_reviews_data(driver, product_dict):
 
             # Review recommendation
             try:
-                if len(review.find_elements(
-                        By.CSS_SELECTOR, 'span[class="bv-badge-label"]')) > 0:
-                    review_dict['writer_recommendation'] = True
-                else:
-                    review_dict['writer_recommendation'] = False
+                try:
+                    if review.find_element(
+                            By.CSS_SELECTOR, 'div[class="bv-content-data-recommend-yes"] ' + \
+                                             'span[class="bv-content-data-label"]').get_attribute('innerText') == 'Yes':
+                        review_dict['writer_recommendation'] = True
+                except:
+                    if review.find_element(
+                            By.CSS_SELECTOR, 'div[class="bv-content-data-recommend-no"] ' + \
+                                             'span[class="bv-content-data-label"]').get_attribute('innerText') == 'No':
+                        review_dict['writer_recommendation'] = False
+                    pass
             except:
                 pass
 
@@ -289,9 +305,12 @@ def collect_reviews_data(driver, product_dict):
             # Verified purchase
             try:
                 if len(review.find_elements(
-                        By.CSS_SELECTOR, 'span[class="bv-badge-label"]')) > 0:
+                        By.CSS_SELECTOR, 'div[class="bv-content-badges-container"] ' + \
+                                         'span[class="bv-badge-label"]')) > 0:
                     review_dict['verified_purchase'] = True
-                else:
+                elif len(review.find_elements(
+                        By.CSS_SELECTOR, 'div[class="bv-content-badges-container"] ' + \
+                                         'span[class="bv-badge-label"]')) < 1:
                     review_dict['verified_purchase'] = False
             except:
                 pass
