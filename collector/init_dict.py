@@ -104,6 +104,7 @@ def init_review_dict():
         'review_date': None,
         'review_title': None,
         'review_text': None,
+        'syndication': None,
         'verified_purchase': None,
         'source': SOURCE,
         'country': COUNTRY,

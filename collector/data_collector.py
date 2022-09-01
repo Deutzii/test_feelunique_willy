@@ -4,9 +4,6 @@
 Regroups all the collectors that collect data on the targeted pages.
 Those collectors return the data in form of dictionaries."""
 
-import random
-import time
-
 from bs4 import BeautifulSoup
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
@@ -246,7 +243,6 @@ def collect_reviews_data(driver, product_dict):
             review_dict['url'] = product_dict['url']
             review_dict['product_name'] = product_dict['product_name']
             review_dict['product_brand'] = product_dict['product_brand']
-            review_dict['n_reviews'] = product_dict['n_reviews']
 
             # Review title
             try:
@@ -274,13 +270,15 @@ def collect_reviews_data(driver, product_dict):
                 try:
                     if review.find_element(
                             By.CSS_SELECTOR, 'div[class="bv-content-data-recommend-yes"] ' + \
-                                             'span[class="bv-content-data-label"]').get_attribute('innerText') == 'Yes':
+                                             'span[class="bv-content-data-label"]').get_attribute(
+                                                'innerText').lower() == 'yes':
                         review_dict['writer_recommendation'] = True
-                except:
-                    if review.find_element(
+                    elif review.find_element(
                             By.CSS_SELECTOR, 'div[class="bv-content-data-recommend-no"] ' + \
-                                             'span[class="bv-content-data-label"]').get_attribute('innerText') == 'No':
+                                             'span[class="bv-content-data-label"]').get_attribute(
+                                                'innerText').lower() == 'no':
                         review_dict['writer_recommendation'] = False
+                except:
                     pass
             except:
                 pass
@@ -299,6 +297,16 @@ def collect_reviews_data(driver, product_dict):
                     By.CSS_SELECTOR, 'span[class="bv-rating-stars-container"] ' + \
                                      'span[class="bv-off-screen"]').get_attribute('innerText'))
                 review_dict['review_rating'] = stars[0]
+            except:
+                pass
+
+            # Syndication
+            try:
+                syndication = review.find_element(
+                    By.CSS_SELECTOR, 'div[class="bv-content-data-syndication"] ' + \
+                                     'div[class="bv-syndication-summary"] ' + \
+                                     'span[class="bv-badge-syndicated"]').get_attribute('innerText')
+                review_dict['syndication'] = syndication
             except:
                 pass
 

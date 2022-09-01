@@ -44,7 +44,7 @@ def select_specific_urls(aggegated_urls, keywords):
                 pass
 
             try:
-                if str(unidecode(keyword).lower()) in str(unidecode(aggregated_url['product_brand']).lower()):
+                if str(unidecode(keyword).lower()) in str(unidecode(aggregated_url['product_category']).lower()):
                     specific_urls.append(aggregated_url)
             except:
                 pass

@@ -36,7 +36,7 @@ def save_products_page_data(driver, category_dict, path_urls):
     # Load the url
     print("[LOG] Loading the page...")
     driver.get(category_dict['url_category'])
-    print("[LOG] Current url: {}.".format(category_dict['url_category']))
+    print("[LOG] Current url: {} ".format(category_dict['url_category']))
     time.sleep(random.uniform(1, 5))
 
     # Accept the cookies
@@ -133,7 +133,7 @@ def save_product_page_data(driver, category_dict, path_products, path_reviews):
     # Detect the presence of the reviews and select them
     while True:
         try:
-            reviews = WebDriverWait(driver, 10).until(EC.presence_of_all_elements_located((
+            _ = WebDriverWait(driver, 10).until(EC.presence_of_all_elements_located((
                 By.CSS_SELECTOR, 'ol[data-bv-v] > li[data-content-id]')))
             print('[LOG] There are some reviews on the current page.')
         except KeyboardInterrupt:

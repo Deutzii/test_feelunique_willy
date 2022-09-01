@@ -76,20 +76,8 @@ def main():
 
                         # Step 3: Verify if the product has at least 1 review
                         if int(product_dict['n_reviews']) > 0:
-
-                            # Step 4: Verify that reviews have been collected
-                            # The length of collected reviews is equal to the printed number of reviews on
-                            # the current product page, so all the reviews have been collected
-                            if len(reviews_dicts) >= int(product_dict['n_reviews']):
-                                url_dict['collected'] = 'yes'
-                                print("[LOG] All the reviews have been collected for the product.")
-
-                            # Step 4 (if not): Not all reviews have been collected
-                            # The length of collected reviews isn't equal to the printed number of reviews on
-                            # the current product page, so not all the reviews have been collected
-                            else:
-                                url_dict['collected'] = 'once'
-                                print("[LOG] Not all the reviews have been collected for the product.")
+                            url_dict['collected'] = 'yes'
+                            print("[LOG] All the reviews have been collected for the product.")
 
                         # Step 3 (if not): The current url has 0 reviews
                         # The current url has 0 reviews

@@ -38,4 +38,4 @@ INDUSTRY = 'cosmetic'
 
 # Collect mode: specific or not specific
 SPECIFIC_URLS_TO_COLLECT = False
-SPECIFIC_KEYWORDS = ['VICHY']
+SPECIFIC_KEYWORDS = ['DIOR']

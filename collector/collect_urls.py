@@ -28,8 +28,7 @@ def main():
         }
 
         # Set the driver
-        ser = Service(PATH_DRIVER)
-        driver = webdriver.Chrome(service=ser, options=OPTIONS)
+        driver = webdriver.Chrome(service=Service(PATH_DRIVER), options=OPTIONS)
 
         # Collect urls data
         _ = save_products_page_data(driver, category_dict, PATH_URLS_NEW)
