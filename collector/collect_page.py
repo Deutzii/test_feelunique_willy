@@ -1,11 +1,11 @@
 #!/usr/bin/env python
-""" Page Collector
+"""Page collector.
 
 Collects data from the product contained in the URL
 The data is then stored inside JSON files in /products and /reviews directories."""
 
-import json
-import os
+import json # TODO -> package pas utilisé
+import os 
 import time
 
 from selenium import webdriver
@@ -15,13 +15,10 @@ from page_navigator import save_product_page_data
 
 from const import (
     OPTIONS,
-    SOURCE,
-    COLLECT_DATE,
-    SPECIFIC_URLS_TO_COLLECT,
+    SOURCE, # TODO -> package pas utilisé
+    COLLECT_DATE, # TODO -> package pas utilisé
+    SPECIFIC_URLS_TO_COLLECT, # TODO -> package pas utilisé
 )
-
-# Set target URL
-target_url = 'https://www.feelunique.com/p/Liz-Earle-Pure-Muslin-Cloths-x-2'
 
 # Set paths
 PATH_PRODUCT = os.path.join(os.curdir, 'product')
@@ -31,6 +28,9 @@ PATH_DRIVER = os.path.join(os.curdir, 'chromedriver')
 
 
 def main():
+    # Set target URL
+    target_url = 'https://www.feelunique.com/p/Liz-Earle-Pure-Muslin-Cloths-x-2' 
+
     # Select the url
     category_dict = {
         'url': target_url,
@@ -40,8 +40,7 @@ def main():
     }
 
     # Load the driver
-    ser = Service(PATH_DRIVER)
-    driver = webdriver.Chrome(service=ser, options=OPTIONS)
+    driver = webdriver.Chrome(service=Service(PATH_DRIVER), options=OPTIONS)
     print("[LOG] Time:", time.strftime('%H:%M:%S'))
 
     # Collect product and reviews data

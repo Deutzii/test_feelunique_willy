@@ -4,8 +4,8 @@
 Regroups all the collectors that collect data on the targeted pages.
 Those collectors return the data in form of dictionaries."""
 
-import random
-import time
+import random # TODO
+import time # TODO
 
 from bs4 import BeautifulSoup
 from selenium.common.exceptions import TimeoutException
@@ -136,6 +136,13 @@ def collect_product_data(driver, category_dict):
 
     product_dict = init_product_dict()
 
+    # Product url
+    product_dict['url'] = category_dict['url']
+
+    # Product categories
+    product_dict['category'] = category_dict['category']
+    product_dict['sub_category'] = category_dict['sub_category']
+    product_dict['sub_sub_category'] = category_dict['sub_sub_category']
 
     # Product sku code
     try:
@@ -145,15 +152,6 @@ def collect_product_data(driver, category_dict):
         product_dict['code_sku'] = driver.find_element(
             By.CSS_SELECTOR, 'div[class="item"] a[class="add-to-wishlist wishHeart"]').get_attribute('data-sku')
         pass
-
-
-    # Product url
-    product_dict['url'] = category_dict['url']
-
-    # Product categories
-    product_dict['category'] = category_dict['category']
-    product_dict['sub_category'] = category_dict['sub_category']
-    product_dict['sub_sub_category'] = category_dict['sub_sub_category']
 
     # Product name
     try:
@@ -233,20 +231,19 @@ def collect_reviews_data(driver, product_dict):
         for id_review, review in enumerate(reviews):
             review_dict = init_review_dict()
 
-            # Product categories
-            review_dict['category'] = product_dict['category']
-            review_dict['sub_category'] = product_dict['sub_category']
-            review_dict['sub_sub_category'] = product_dict['sub_sub_category']
-
             # Review id
             review_dict['id_review_product'] = 1 + id_review
 
             # Retrieve the information from the product dictionary
-            review_dict['code_sku'] = product_dict['code_sku']
-            review_dict['url'] = product_dict['url']
             review_dict['product_name'] = product_dict['product_name']
             review_dict['product_brand'] = product_dict['product_brand']
-            review_dict['n_reviews'] = product_dict['n_reviews']
+            review_dict['url'] = product_dict['url']
+            review_dict['code_sku'] = product_dict['code_sku']
+
+            # Product categories
+            review_dict['category'] = product_dict['category']
+            review_dict['sub_category'] = product_dict['sub_category']
+            review_dict['sub_sub_category'] = product_dict['sub_sub_category']
 
             # Review title
             try:
@@ -314,6 +311,8 @@ def collect_reviews_data(driver, product_dict):
                     review_dict['verified_purchase'] = False
             except:
                 pass
+            
+            # TODO -> ajouter la syndication des reviews + ajouter la clé dans le dictionnaire initial d'une review -> voir avec Nadji
 
             reviews_dicts.append(review_dict)
 

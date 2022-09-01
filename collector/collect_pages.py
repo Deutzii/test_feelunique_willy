@@ -53,7 +53,7 @@ def main():
         if url_dict['collected'] == 'no':
 
             # Load the driver
-            ser = Service(PATH_DRIVER)
+            ser = Service(PATH_DRIVER) # TODO -> pas utiliser la variable 'ser'
             driver = webdriver.Chrome(service=ser, options=OPTIONS)
             print("[LOG] Time:", time.strftime('%H:%M:%S'))
 
@@ -68,6 +68,10 @@ def main():
 
                 # Change the status of the current url and save it
                 # --------------------------------------------------------
+                # TODO -> modifier l'algorithme de changement de la clé "collected" pour l'url
+                # car il y a des ratings-only mais nous n'avons pas leur nombre -> donc cette condition ne peut pas 
+                # être appliquée: if len(reviews_dicts) >= int(product_dict['n_reviews']):
+
                 # Step 1: Verify if the product has a name
                 if product_dict['product_name']:
 

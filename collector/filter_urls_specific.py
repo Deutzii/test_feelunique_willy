@@ -42,7 +42,8 @@ def select_specific_urls(aggegated_urls, keywords):
                     specific_urls.append(aggregated_url)
             except:
                 pass
-
+            
+            # TODO -> ne pas mettre de condition sur la clé 'product_brand' car il n'y en a pas
             try:
                 if str(unidecode(keyword).lower()) in str(unidecode(aggregated_url['product_brand']).lower()):
                     specific_urls.append(aggregated_url)

@@ -1,6 +1,9 @@
 
 CATEGORIES = [
     # Category: Makeup
+    # TODO -> ajouter les catégories suivantes:
+    # ('Makeup', None, None, 500, 'https://www.feelunique.com/makeup'),
+    # ('Makeup', 'Complexion', None, 500, 'https://www.feelunique.com/makeup/face'),
     ('Makeup', 'Complexion', 'Foundation', 500, 'https://feelunique.com/makeup/face/foundations?filter=fh_location=//c1/en_GB/categories%3C{c1_c1c6}/categories%3C{c1_c1c6_c1c6c12}/categories%3C{c1_c1c6_c1c6c12_c1c6c12c1}/!exclude_countries%3E{fr}/!site_exclude%3E{47}/!brand={a70}/'),
     ('Makeup', 'Complexion', 'Blusher', 500, 'https://feelunique.com/makeup/face/blushers?filter=fh_location=//c1/en_GB/categories%3C{c1_c1c6}/categories%3C{c1_c1c6_c1c6c12}/categories%3C{c1_c1c6_c1c6c12_c1c6c12c2}/!exclude_countries%3E{fr}/!site_exclude%3E{47}/!brand={a70}/'),
     ('Makeup', 'Complexion', 'Bronzer', 500, 'https://feelunique.com/makeup/face/bronzers?filter=fh_location=//c1/en_GB/categories%3C{c1_c1c6}/categories%3C{c1_c1c6_c1c6c12}/categories%3C{c1_c1c6_c1c6c12_c1c6c12c3}/!exclude_countries%3E{fr}/!site_exclude%3E{47}/!brand={a70}/'),
@@ -49,8 +52,7 @@ CATEGORIES = [
     ('Makeup', 'Gift Sets', None, 500, 'https://feelunique.com/makeup/makeup-sets?filter=fh_location=//c1/en_GB/categories%3C{c1_c1c6}/categories%3C{c1_c1c6_c1c6c9}/!exclude_countries%3E{fr}/!site_exclude%3E{47}/!brand={a70}/'),
     ('Makeup', 'Travel Minis', None, 500, 'https://feelunique.com/makeup/travel-size-makeup?filter=fh_location=//c1/en_GB/categories%3C{c1_c1c6}/categories%3C{c1_c1c6_c1c6c30}/!exclude_countries%3E{fr}/!site_exclude%3E{47}/!brand={a70}/'),
 
-
-# Category: Skincare
+    # Category: Skincare
     ('Skincare', 'Moisturisers', 'Oily & Combination Skin', 500, 'https://feelunique.com/skin/moisturisers/oily-combination-skin?filter=fh_location=//c1/en_GB/categories%3C{c1_c1c1}/categories%3C{c1_c1c1_c1c1c1}/categories%3C{c1_c1c1_c1c1c1_c1c1c1c5}/!exclude_countries%3E{fr}/!site_exclude%3E{47}/!brand={a70}/'),
     ('Skincare', 'Moisturisers', 'Day Creams', 999, 'https://feelunique.com/skin/moisturisers/day-creams?filter=fh_location=//c1/en_GB/categories%3C{c1_c1c1}/categories%3C{c1_c1c1_c1c1c1}/categories%3C{c1_c1c1_c1c1c1_c1c1c1c1}/!exclude_countries%3E{gb}/!site_exclude%3E{47}/!brand={a70}/'),
     ('Skincare', 'Moisturisers', 'Night Creams', 999, 'https://feelunique.com/skin/moisturisers/night-creams?filter=fh_location=//c1/en_GB/categories%3C{c1_c1c1}/categories%3C{c1_c1c1_c1c1c1}/categories%3C{c1_c1c1_c1c1c1_c1c1c1c2}/!exclude_countries%3E{gb}/!site_exclude%3E{47}/!brand={a70}/'),
@@ -100,7 +102,6 @@ CATEGORIES = [
     ('Skincare', 'Gifts & Sets', None, 500, 'https://feelunique.com/skin/skincare-gifts?filter=fh_location=//c1/en_GB/categories%3C{c1_c1c1}/categories%3C{c1_c1c1_c1c1c11}/!exclude_countries%3E{gb}/!site_exclude%3E{47}/!brand={a70}/'),
     ('Skincare', "Men's Skincare", None, 500, 'https://feelunique.com/skin/mens-skincare?filter=fh_location=//c1/en_GB/categories%3C{c1_c1c1}/hisandhers%3E{1}//!exclude_countries%3E{gb}/!exclude_countries%3E{gb}/!site_exclude%3E{47}/!brand={a70}/'),
 
-
     # Category: Hair
     ('Hair', 'Shampoo', 'Dry Shampoo', 500, 'https://feelunique.com/hair/shampoo/dry-shampoo'),
     ('Hair', 'Shampoo', 'Anti-Dandruff', 500, 'https://feelunique.com/hair/shampoo/anti-dandruff'),
@@ -136,7 +137,6 @@ CATEGORIES = [
     ('Hair', 'Gifts & Sets', None, 500, 'https://feelunique.com/hair/hair-care-sets?filter=fh_location=//c1/en_GB/categories%3C{c1_c1c9}/categories%3C{c1_c1c9_c1c9c12}/!exclude_countries%3E{gb}/!site_exclude%3E{47}/!brand={a70}/'),
     ('Hair', 'Travel Minis', None, 500, 'https://feelunique.com/hair/travel-size-hair?filter=fh_location=//c1/en_GB/categories%3C{c1_c1c9}/categories%3C{c1_c1c9_c1c9c28}/!exclude_countries%3E{gb}/!site_exclude%3E{47}/!brand={a70}/'),
 
-
     # Category: Body
     ('Body', 'Body Care', 'Body Lotions & Moisturisers', 271, 'https://feelunique.com/body/body-care/lotions-moisturisers?filter=fh_location=//c1/en_GB/categories%3C{c1_c1c5}/categories%3C{c1_c1c5_c1c5c5}/categories%3C{c1_c1c5_c1c5c5_c1c5c5c2}/!exclude_countries%3E{gb}/!site_exclude%3E{47}/!brand={a70}/'),
     ('Body', 'Body Care', 'Oils', 500, 'https://feelunique.com/body/body-care/oils?filter=fh_location=//c1/en_GB/categories%3C{c1_c1c5}/categories%3C{c1_c1c5_c1c5c5}/categories%3C{c1_c1c5_c1c5c5_c1c5c5c3}/!exclude_countries%3E{gb}/!site_exclude%3E{47}/!brand={a70}/'),
@@ -169,7 +169,6 @@ CATEGORIES = [
     ('Body', 'Bathroom Accessories', None, 500, 'https://feelunique.com/body/bathroom-accessories'),
     ('Body', 'Travel Minis', None, 500, 'https://feelunique.com/body/travel-sizes-bath-body'),
     ('Body', 'Gifts & Sets', None, 500, 'https://feelunique.com/body/bath-and-body-gifts?filter=fh_location=//c1/en_GB/categories%3C{c1_c1c5}/categories%3C{c1_c1c5_c1c5c10}/!exclude_countries%3E{gb}/!site_exclude%3E{47}/!brand={a70}/'),
-
 
     # Category: Fragance
     ('Body', 'Perfume & Eau de Parfum', None, 361, 'https://feelunique.com/fragrances/perfume-eau-de-parfum?filter=fh_location=//c1/en_GB/categories%3C{c1_c1c2}/categories%3C{c1_c1c2_c1c2c14}/!exclude_countries%3E{gb}/!site_exclude%3E{47}/!brand={a70}/'),

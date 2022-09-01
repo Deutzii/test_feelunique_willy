@@ -28,7 +28,7 @@ def main():
         }
 
         # Set the driver
-        ser = Service(PATH_DRIVER)
+        ser = Service(PATH_DRIVER) # TODO
         driver = webdriver.Chrome(service=ser, options=OPTIONS)
 
         # Collect urls data
